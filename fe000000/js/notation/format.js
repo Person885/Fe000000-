@@ -13,7 +13,7 @@ return “-”+str.repeat(value.layer)+value.magnitude
 }
 function format (x) {
   if(typeof(x)==object){
-    formatDec(x)
+    return formatDec(x)
   }
   else{
   return formatWithPrecision(x, NotationOptions.lowerPrecision());
@@ -23,7 +23,7 @@ function format (x) {
 function formatPrecisely (x) {
   function format (x) {
   if(typeof(x)==object){
-    formatDec(x)
+    return formatDec(x)
   }
   else{
   return formatWithPrecision(x, NotationOptions.higherPrecision());
@@ -33,7 +33,7 @@ function formatPrecisely (x) {
 function formatVeryPrecisely (x) {
   function format (x) {
   if(typeof(x)==object){
-    formatDec(x)
+    return formatDec(x)
   }
   else{
   return formatWithPrecision(x, NotationOptions.highestPrecision());}
@@ -42,7 +42,7 @@ function formatVeryPrecisely (x) {
 function formatInt (x) {
  function format (x) {
   if(typeof(x)==object){
-    formatDec(x)
+    return formatDec(x)
   }
    else{
   let lp = NotationOptions.lowerPrecision();
