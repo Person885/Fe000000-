@@ -5,10 +5,10 @@ if(value.sign == 0){
 return 0;
 }
 if(value.sign == 1){
-return str.repeat(value.layer)+value.magnitude;
+return str.repeat(value.layer)+value.mag;
 }
 if(value.sign == -1){
-return "-"+str.repeat(value.layer)+value.magnitude;
+return "-"+str.repeat(value.layer)+value.mag;
 }
 }
 function format (x) {
