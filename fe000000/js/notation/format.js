@@ -21,7 +21,6 @@ function format (x) {
 }
 
 function formatPrecisely (x) {
-  function format (x) {
   if(typeof(x)=="object"){
     return formatDec(x)
   }
@@ -31,7 +30,6 @@ function formatPrecisely (x) {
 }
 
 function formatVeryPrecisely (x) {
-  function format (x) {
   if(typeof(x)=="object"){
     return formatDec(x)
   }
@@ -40,7 +38,6 @@ function formatVeryPrecisely (x) {
 }
 
 function formatInt (x) {
- function format (x) {
   if(typeof(x)=="object"){
     return formatDec(x)
   }
