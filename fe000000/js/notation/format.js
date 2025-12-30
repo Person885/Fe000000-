@@ -1,6 +1,6 @@
 let NOTATIONS = {};
 function formatDec(value){
-str = "e"
+const str = "e"
 if(value.sign == 0){
 return 0
 }
