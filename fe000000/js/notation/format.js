@@ -1,21 +1,53 @@
 let NOTATIONS = {};
-
+function formatDec(value){
+str = “e”
+if(value.sign == 0){
+return 0
+}
+if(value.sign == 1){
+return str.repeat(value.layer)+value.magnitude
+}
+if(value.sign == -1){
+return “-”+str.repeat(value.layer)+value.magnitude
+}
+}
 function format (x) {
+  if(typeof(x)==object){
+    formatDec(x)
+  }
+  else{
   return formatWithPrecision(x, NotationOptions.lowerPrecision());
+  }
 }
 
 function formatPrecisely (x) {
+  function format (x) {
+  if(typeof(x)==object){
+    formatDec(x)
+  }
+  else{
   return formatWithPrecision(x, NotationOptions.higherPrecision());
+  }
 }
 
 function formatVeryPrecisely (x) {
-  return formatWithPrecision(x, NotationOptions.highestPrecision());
+  function format (x) {
+  if(typeof(x)==object){
+    formatDec(x)
+  }
+  else{
+  return formatWithPrecision(x, NotationOptions.highestPrecision());}
 }
 
 function formatInt (x) {
+ function format (x) {
+  if(typeof(x)==object){
+    formatDec(x)
+  }
+   else{
   let lp = NotationOptions.lowerPrecision();
   return getNotation().format(x, lp, 0, lp);
-}
+}}
 
 function formatOrdinalInt (x) {
   if (NotationOptions.formatOrdinals()) {
@@ -34,6 +66,7 @@ function getTimeNotation() {
 }
 
 function formatTimeNum(x) {
+  
   let lp = NotationOptions.lowerPrecision();
   return getTimeNotation().format(x, lp, lp, lp);
 }
