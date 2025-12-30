@@ -1,6 +1,6 @@
 let NOTATIONS = {};
 function formatDec(value){
-str = “e”
+str = "e"
 if(value.sign == 0){
 return 0
 }
@@ -8,7 +8,7 @@ if(value.sign == 1){
 return str.repeat(value.layer)+value.magnitude
 }
 if(value.sign == -1){
-return “-”+str.repeat(value.layer)+value.magnitude
+return "-"+str.repeat(value.layer)+value.magnitude
 }
 }
 function format (x) {
