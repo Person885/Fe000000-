@@ -12,7 +12,7 @@ return “-”+str.repeat(value.layer)+value.magnitude
 }
 }
 function format (x) {
-  if(typeof(x)==object){
+  if(typeof(x)=="object"){
     return formatDec(x)
   }
   else{
@@ -22,7 +22,7 @@ function format (x) {
 
 function formatPrecisely (x) {
   function format (x) {
-  if(typeof(x)==object){
+  if(typeof(x)=="object"){
     return formatDec(x)
   }
   else{
@@ -32,7 +32,7 @@ function formatPrecisely (x) {
 
 function formatVeryPrecisely (x) {
   function format (x) {
-  if(typeof(x)==object){
+  if(typeof(x)=="object"){
     return formatDec(x)
   }
   else{
@@ -41,7 +41,7 @@ function formatVeryPrecisely (x) {
 
 function formatInt (x) {
  function format (x) {
-  if(typeof(x)==object){
+  if(typeof(x)=="object"){
     return formatDec(x)
   }
    else{
