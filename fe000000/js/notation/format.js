@@ -1,19 +1,19 @@
 let NOTATIONS = {};
 function formatDec(value){
-const str = "e"
+const str = "e";
 if(value.sign == 0){
-return 0
+return 0;
 }
 if(value.sign == 1){
-return str.repeat(value.layer)+value.magnitude
+return str.repeat(value.layer)+value.magnitude;
 }
 if(value.sign == -1){
-return "-"+str.repeat(value.layer)+value.magnitude
+return "-"+str.repeat(value.layer)+value.magnitude;
 }
 }
 function format (x) {
   if(typeof(x)=="object"){
-    return formatDec(x)
+    return formatDec(x);
   }
   else{
   return formatWithPrecision(x, NotationOptions.lowerPrecision());
@@ -22,7 +22,7 @@ function format (x) {
 
 function formatPrecisely (x) {
   if(typeof(x)=="object"){
-    return formatDec(x)
+    return formatDec(x);
   }
   else{
   return formatWithPrecision(x, NotationOptions.higherPrecision());
@@ -31,7 +31,7 @@ function formatPrecisely (x) {
 
 function formatVeryPrecisely (x) {
   if(typeof(x)=="object"){
-    return formatDec(x)
+    return formatDec(x);
   }
   else{
   return formatWithPrecision(x, NotationOptions.highestPrecision());}
@@ -39,7 +39,7 @@ function formatVeryPrecisely (x) {
 
 function formatInt (x) {
   if(typeof(x)=="object"){
-    return formatDec(x)
+    return formatDec(x);
   }
    else{
   let lp = NotationOptions.lowerPrecision();
