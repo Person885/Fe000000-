@@ -198,7 +198,7 @@ let Chroma = {
     return this.nextColorName() + 'span';
   },
   isProducing() {
-    return this.amount() >= this.colorAmount(player.chroma.current);
+    return new Decimal(this.amount()).gte(this.colorAmount(player.chroma.current));
   },
   nextExtraTheorem() {
     return new Decimal(4096).mul((Decimal.pow(2, Decimal.pow(new Decimal(1).add(this.extraTheoremsActualAndDisplay())), new Decimal(1).div(ComplexityAchievements.effect(3, 4))).div(new Decimal(16))).sub(new Decimal(1)));
@@ -222,7 +222,7 @@ let Chroma = {
     return t.div(this.chromaSpeedMultiplier()).sub(player.stats.timeSinceEternity);
   },
   currentProductionText() {
-    if (this.colorAmount(player.chroma.current).gt(this.cap())) {
+    if (new Decimal(this.colorAmount(player.chroma.current)).gt(this.cap())) {
       return 'would be producing ' + this.currentColorName() + ' except that it\'s already above the current chroma cap'
     } else if (this.amount() === this.cap()) {
       return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
