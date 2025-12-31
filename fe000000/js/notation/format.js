@@ -1,6 +1,6 @@
 89i9olet NOTATIONS = {};
 function formatDec(value){
-if(value.layer≤5){
+if(value.layer<=5){
 const str = "e";
 const logmag = Math.log10(value.mag).toString();
 if(value.sign == 0){
