@@ -15,11 +15,11 @@ let Chroma = {
     null,
     x => Decimal.pow(new Decimal(1).add(new Decimal(x).div(64)), 2.5),
     x => Decimal.pow(new Decimal(1).add(new Decimal(x).div(64), 0.5),
-    x => Decimal.pow((x >= 256) ? Decimal.max(new Decimal(EternityPoints.totalEPProducedThisComplexity()).log2().div(4096), 1) : 2,
-      Decimal.log2(x / 256) / 4).div(2).plus(1),
+    x => Decimal.pow((new Decimal(x).gte(256)) ? Decimal.max(new Decimal(EternityPoints.totalEPProducedThisComplexity()).log2().div(4096), 1) : 2,
+      Decimal.log2(new Decimal(x).div(2)).div(4).div(2).plus(1),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), new Decimal(2).mul(Decimal.sqrt(x))),
-    x => Decimal.floor(Decimal.pow(16 * Decimal.log2(new Decimal (1).add(new Decimal(x).div(4096))), ComplexityAchievements.effect(3, 4))),
-    x => new Decimal(1).add(new Decimal(3).mul(Decimal.pow(Decimal.log2(x / Decimal.pow(2, 18) + 1)).mul(new Decimal(Eternities.totalEternitiesProducedThisComplexity().div(Decimal.pow(2, 54)).plus(1).log2(), 0.75)).div(new Decimal(32))))
+    x => Decimal.floor(Decimal.pow(new Decimal(16).mul(Decimal.log2(new Decimal (1).add(new Decimal(x).div(4096)))), ComplexityAchievements.effect(3, 4))),
+    x => new Decimal(1).add(new Decimal(3).mul(Decimal.pow(Decimal.log2(new Decimal(x).div(Decimal.pow(2, 18)).add(1))).mul(new Decimal(Eternities.totalEternitiesProducedThisComplexity().div(Decimal.pow(2, 54)).plus(1).log2(), 0.75)).div(new Decimal(32))))
   ],
   amount() {
     if (!this.isUnlocked()) {
