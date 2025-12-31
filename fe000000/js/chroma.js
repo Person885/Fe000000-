@@ -30,7 +30,7 @@ let Chroma = {
     }
     let t = new Decimal(new Decimal(player.stats.timeSinceEternity).mul(this.chromaSpeedMultiplier()));
     let cap = this.cap();
-    return cap.mul((-Decimal.exp(-2 * t / cap).sub(1));
+    return cap.mul((-Decimal.exp(new Decimal (-2).mul(t).div(cap))).sub(1));
   },
   displayAmount() {
     return player.chroma.displayAmount;
