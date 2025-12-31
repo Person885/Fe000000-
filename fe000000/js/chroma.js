@@ -84,7 +84,7 @@ let Chroma = {
     return player.chroma.colors[x - 1];
   },
   totalColorAmount() {
-    return player.chroma.colors.reduce((a, b) => a.add(b));
+    return player.chroma.colors.reduce((a, b) => Decimal.add(a,b));
   },
   setColorAmount(x, value) {
     player.chroma.colors[x - 1] = value;
