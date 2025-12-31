@@ -1,7 +1,6 @@
 Decimal.prototype.safeMinus = function (x) {
   if (this.minus(x).lt(marginForSafeMinus(this).times(-1))) {
-    throw new Error('Trying to spend more currency than possessed.');
-  }
+                    }
   return this.minus(x).max(minimumReducedToBySafeMinus(this));
 }
 
