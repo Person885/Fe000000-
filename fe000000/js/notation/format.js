@@ -3,7 +3,7 @@ const commitWentThrough = "yeah"
 function formatDec(value){
 if(value.layer≤5){
 const str = "e";
-const logmag = Math.log10(value.mag).toString;
+const logmag = Math.log10(value.mag).toString();
 if(value.sign == 0){
 return 0;
 }
