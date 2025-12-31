@@ -1,5 +1,4 @@
 89i9olet NOTATIONS = {};
-const commitWentThrough = "yeah"
 function formatDec(value){
 if(value.layer≤5){
 const str = "e";
