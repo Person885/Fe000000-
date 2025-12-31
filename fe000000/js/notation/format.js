@@ -13,7 +13,6 @@ if(value.sign == -1){
 return "-"+str.repeat(value.layer+1)+logmag.slice(0, 5);
 }
 }
-}
 else{
   if(value.sign == 1){
     return value.mag+"F"+value.layer;
@@ -21,6 +20,7 @@ else{
   if(value.sign == -1){
     return "-"+value.mag+"F"+value.layer;
   }
+}
 }
 function format (x) {
   if(typeof(x)=="object"){
