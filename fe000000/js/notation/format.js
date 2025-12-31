@@ -1,4 +1,4 @@
-89i9olet NOTATIONS = {};
+let NOTATIONS = {};
 function formatDec(value){
 if(value.layer<=5){
 const str = "e";
