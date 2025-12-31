@@ -1,5 +1,6 @@
 let NOTATIONS = {};
 function formatDec(value){
+if(value.layer≤5){
 const str = "e";
 const logmag = toString(Math.log10(value.mag))
 if(value.sign == 0){
@@ -11,6 +12,15 @@ return str.repeat(value.layer+1)+logmag.slice(0, 5);
 if(value.sign == -1){
 return "-"+str.repeat(value.layer+1)+logmag.slice(0, 5);
 }
+}
+}
+else{
+  if(value.sign == 1){
+    return value.mag+"F"+value.layer
+  }
+  if(value.sign == -1){
+    return "-"+value.mag+"F"+value.layer
+  }
 }
 function format (x) {
   if(typeof(x)=="object"){
