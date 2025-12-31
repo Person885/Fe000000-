@@ -5,21 +5,21 @@ let Chroma = {
     Decimal.pow(2, 4096),
     Decimal.pow(2, 8192),
     Decimal.pow(2, 12288),
-    Decimal.pow(2, Math.pow(2, 14)),
-    Decimal.pow(2, Math.pow(2, 15)),
-    Decimal.pow(2, Math.pow(2, 17)),
+    Decimal.pow(2, Decimal.pow(2, 14)),
+    Decimal.pow(2, Decimal.pow(2, 15)),
+    Decimal.pow(2, Decimal.pow(2, 17)),
   ],
   // The third color formula has a special case for x < 256 so that having more EP
   // doesn't hurt for sufficiently small x (due to the power of Math.log2(x / 256) / 4 being negative).
   colorEffectFormulas: [
     null,
-    x => Math.pow(1 + x / 1024, 2.5),
+    x => Decimal.pow(1 + x / 1024, 2.5),
     x => Decimal.pow(1 + x / 64, 0.5),
-    x => Decimal.pow((x >= 256) ? Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1) : 2,
-      Math.log2(x / 256) / 4).div(2).plus(1),
-    x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
-    x => Math.floor(Math.pow(16 * Math.log2(1 + x / 4096), ComplexityAchievements.effect(3, 4))),
-    x => 1 + 3 * Math.pow(Math.log2(x / Math.pow(2, 18) + 1) * Eternities.totalEternitiesProducedThisComplexity().div(Math.pow(2, 54)).plus(1).log2(), 0.75) / 32
+    x => Decimal.pow((x >= 256) ? Decimal.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1) : 2,
+      Decimal.log2(x / 256) / 4).div(2).plus(1),
+    x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Decimal.sqrt(x)),
+    x => Decimal.floor(Decimal.pow(16 * Decimal.log2(1 + x / 4096), ComplexityAchievements.effect(3, 4))),
+    x => 1 + 3 * Decimal.pow(Decimal.log2(x / Decimal.pow(2, 18) + 1) * Eternities.totalEternitiesProducedThisComplexity().div(Decimal.pow(2, 54)).plus(1).log2(), 0.75) / 32
   ],
   amount() {
     if (!this.isUnlocked()) {
@@ -28,20 +28,20 @@ let Chroma = {
     if (this.isFast()) {
       return this.cap();
     }
-    let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier().toNumber();
+    let t = new Decimal(new Decimal(player.stats.timeSinceEternity).mul(this.chromaSpeedMultiplier()));
     let cap = this.cap();
-    return cap * (-Math.expm1(-2 * t / cap));
+    return cap * (-Decimal.exp(-2 * t / cap).sub(1);
   },
   displayAmount() {
     return player.chroma.displayAmount;
   },
   cap() {
     let factors = [
-      Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1),
+      Decimal.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1),
       Studies.chromaCapMultiplier(), ComplexityChallenge.getComplexityChallengeReward(4),
       ComplexityAchievements.effect(4, 3), FinalityShardUpgrade(5).effect()
     ];
-    return Math.safePow(factors.reduce((a, b) => a * b), Galaxy.effect());
+    return Decimal.pow(factors.reduce((a, b) => a * b), Galaxy.effect());
   },
   chromaSpeedMultiplier() {
     let factors = [
@@ -107,7 +107,7 @@ let Chroma = {
      } else {
       let color = player.chroma.current;
       if (color === 0) return;
-      this.setColorAmount(color, Math.max(this.colorAmount(color), chromaAmount));
+      this.setColorAmount(color, Decimal.max(this.colorAmount(color), chromaAmount));
     }
   },
   hasOptions() {
@@ -201,7 +201,7 @@ let Chroma = {
     return this.amount() >= this.colorAmount(player.chroma.current);
   },
   nextExtraTheorem() {
-    return 4096 * (Math.pow(2, Math.pow(1 + this.extraTheoremsActualAndDisplay(), 1 / ComplexityAchievements.effect(3, 4)) / 16) - 1);
+    return 4096 * (Decimal.pow(2, Decimal.pow(1 + this.extraTheoremsActualAndDisplay(), 1 / ComplexityAchievements.effect(3, 4)) / 16) - 1);
   },
   timeUntilProduction() {
     return this.timeUntilChromaIs(this.colorAmount(player.chroma.current));
@@ -218,11 +218,11 @@ let Chroma = {
     if (this.isFast()) {
       return 0;
     }
-    let t = -cap * Math.log(1 - c / cap) / 2;
-    return t / this.chromaSpeedMultiplier() - player.stats.timeSinceEternity;
+    let t = -cap * Decimal.log(1 - c / cap) / 2;
+    return t.div(this.chromaSpeedMultiplier()).sub(player.stats.timeSinceEternity);
   },
   currentProductionText() {
-    if (this.colorAmount(player.chroma.current) > this.cap()) {
+    if (this.colorAmount(player.chroma.current).gt(this.cap())) {
       return 'would be producing ' + this.currentColorName() + ' except that it\'s already above the current chroma cap'
     } else if (this.amount() === this.cap()) {
       return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
@@ -302,13 +302,13 @@ let Chroma = {
     Autobuyer(13).redisplayPriority();
   },
   timeForChromaTextMargin() {
-    return this.cap() * (1 - Math.pow(2, -16));
+    return this.cap().mul((1 - Decimal.pow(2, -16)));
   },
   timeForChromaTextChromaValue() {
     if (this.timeForChromaMode() === 'chroma') {
       return this.timeForChromaValue();
     } else if (this.timeForChromaMode() === 'fraction of chroma cap') {
-      return this.cap() * this.timeForChromaValue();
+      return this.cap().mul(this.timeForChromaValue());
     }
   },
   timeForChromaTextPrefix() {
@@ -317,12 +317,12 @@ let Chroma = {
     }
     let c = this.timeForChromaTextChromaValue();
     let cap = this.cap();
-    if (c > cap) {
+    if (c.gt(cap)) {
       return 'will never get';
     }
-    c = Math.min(c, this.timeForChromaTextMargin());
+    c = Decimal.min(c, this.timeForChromaTextMargin());
     let t = this.timeUntilChromaIs(c);
-    if (t <= 0) {
+    if (t.lte(0)) {
       return 'already have';
     }
     return 'will get';
@@ -333,12 +333,12 @@ let Chroma = {
     }
     let c = this.timeForChromaTextChromaValue();
     let cap = this.cap();
-    if (c > cap) {
+    if (c.gt(cap)) {
       return '';
     }
-    c = Math.min(c, this.timeForChromaTextMargin());
+    c = Decimal.min(c, this.timeForChromaTextMargin());
     let t = this.timeUntilChromaIs(c);
-    if (t <= 0) {
+    if (t.lte(0)) {
       return '';
     }
     return ' in ' + formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
