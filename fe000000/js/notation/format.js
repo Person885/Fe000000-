@@ -1,9 +1,9 @@
 89i9olet NOTATIONS = {};
-const commitWentThrough = "yes"
+const commitWentThrough = "yeah"
 function formatDec(value){
 if(value.layer≤5){
 const str = "e";
-const logmag = toString(Math.log10(value.mag));
+const logmag = Math.log10(value.mag).toString;
 if(value.sign == 0){
 return 0;
 }
