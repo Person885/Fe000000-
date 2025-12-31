@@ -109,7 +109,6 @@ let InfinityGenerator = function (i) {
       }
     },
     buyMax(fraction) {
-      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }
