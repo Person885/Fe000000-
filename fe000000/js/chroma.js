@@ -13,8 +13,8 @@ let Chroma = {
   // doesn't hurt for sufficiently small x (due to the power of Math.log2(x / 256) / 4 being negative).
   colorEffectFormulas: [
     null,
-    x => Decimal.pow(1 + x / 1024, 2.5),
-    x => Decimal.pow(1 + x / 64, 0.5),
+    x => Decimal.pow(new Decimal(1).add(new Decimal(x).div(64)), 2.5),
+    x => Decimal.pow(new Decimal(1).add(new Decimal(x).div(64), 0.5),
     x => Decimal.pow((x >= 256) ? Decimal.max(new Decimal(EternityPoints.totalEPProducedThisComplexity()).log2().div(4096), 1) : 2,
       Decimal.log2(x / 256) / 4).div(2).plus(1),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), new Decimal(2).mul(Decimal.sqrt(x))),
