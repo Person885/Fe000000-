@@ -30,7 +30,7 @@ let Chroma = {
     }
     let t = new Decimal(new Decimal(player.stats.timeSinceEternity).mul(this.chromaSpeedMultiplier()));
     let cap = this.cap();
-    return cap.mul((-Decimal.exp(new Decimal (-2).mul(t).div(cap))).sub(1));
+    return cap.mul((-Decimal.exp(new Decimal (-2).mul(new Decimal (t)).div(new Decimal (cap)))).sub(1));
   },
   displayAmount() {
     return player.chroma.displayAmount;
@@ -207,19 +207,19 @@ let Chroma = {
     return this.timeUntilChromaIs(this.colorAmount(player.chroma.current));
   },
   isFast() {
-    return this.chromaSpeedMultiplier().gte(Decimal.pow(2, 256));
+    return new Decimal (this.chromaSpeedMultiplier()).gte(Decimal.pow(2, 256));
   },
   timeUntilChromaIs(c) {
     let cap = this.cap();
-    if (c.gt(cap)) {
+    if (new Decimal(c).gt(cap)) {
       return Infinity;
     }
     // Do this special case *after* checking for cap.
     if (this.isFast()) {
       return 0;
     }
-    let t = -cap.mul(Decimal.log(new Decimal(1).sub(c.div(cap))).div(2));
-    return t.div(this.chromaSpeedMultiplier()).sub(player.stats.timeSinceEternity);
+    let t = new Decimal(-cap.mul(Decimal.log(new Decimal(1).sub(new Decimal (c).div(cap))).div(2)));
+    return new Decimal (t).div(this.chromaSpeedMultiplier()).sub(player.stats.timeSinceEternity);
   },
   currentProductionText() {
     if (new Decimal(this.colorAmount(player.chroma.current)).gt(this.cap())) {
@@ -308,7 +308,7 @@ let Chroma = {
     if (this.timeForChromaMode() === 'chroma') {
       return this.timeForChromaValue();
     } else if (this.timeForChromaMode() === 'fraction of chroma cap') {
-      return this.cap().mul(this.timeForChromaValue());
+      return new Decimal (this.cap()).mul(this.timeForChromaValue());
     }
   },
   timeForChromaTextPrefix() {
@@ -317,12 +317,12 @@ let Chroma = {
     }
     let c = this.timeForChromaTextChromaValue();
     let cap = this.cap();
-    if (c.gt(cap)) {
+    if (new Decimal(c).gt(cap)) {
       return 'will never get';
     }
     c = Decimal.min(c, this.timeForChromaTextMargin());
-    let t = this.timeUntilChromaIs(c);
-    if (t.lte(0)) {
+    let t = new Decimal(this.timeUntilChromaIs(c));
+    if (new Decimal(t).lte(0)) {
       return 'already have';
     }
     return 'will get';
@@ -333,12 +333,12 @@ let Chroma = {
     }
     let c = this.timeForChromaTextChromaValue();
     let cap = this.cap();
-    if (c.gt(cap)) {
+    if (new Decimal(c).gt(cap)) {
       return '';
     }
     c = Decimal.min(c, this.timeForChromaTextMargin());
-    let t = this.timeUntilChromaIs(c);
-    if (t.lte(0)) {
+    let t = new Decimal(this.timeUntilChromaIs(c));
+    if (new Decimal(t).lte(0)) {
       return '';
     }
     return ' in ' + formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
