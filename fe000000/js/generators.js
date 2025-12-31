@@ -122,7 +122,6 @@ let Generator = function (i) {
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
       if (!free) {
-        player.stars = player.stars.safeMinus(this.costFor(n));
       }
       this.addAmount(n);
       this.addBought(n);
