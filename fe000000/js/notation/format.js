@@ -2,7 +2,7 @@ let NOTATIONS = {};
 function formatDec(value){
 if(value.layer≤5){
 const str = "e";
-const logmag = toString(Math.log10(value.mag))
+const logmag = toString(Math.log10(value.mag));
 if(value.sign == 0){
 return 0;
 }
