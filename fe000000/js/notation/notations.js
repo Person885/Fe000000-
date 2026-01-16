@@ -84,10 +84,10 @@ let adaptedFormat = function (value, places, placesUnder1000, placesExponent) {
   }
 
   if (ADNotations.Settings.isInfinite(decimal.abs())) {
-    return decimal.sign() < 0 ? this.negativeInfinite : this.infinite;
+    return decimal.sign < 0 ? this.negativeInfinite : this.infinite;
   }
 
-  return decimal.sign() < 0
+  return decimal.sign < 0
     ? this.formatNegativeDecimal(decimal.abs(), places, placesExponent)
     : this.formatDecimal(decimal, places, placesExponent);
   }
